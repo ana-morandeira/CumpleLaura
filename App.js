@@ -1,7 +1,3 @@
-// ─────────────────────────────────────────────
-// Constants
-// ─────────────────────────────────────────────
-
 const STORAGE_KEY_COUNT   = 'laura-count-v1';
 const STORAGE_KEY_HISTORY = 'laura-history-v1';
 
@@ -27,9 +23,6 @@ const CONFETTI_PER_BURST  = 24;
 const MILESTONE_BURST_COUNT = 6;
 const MILESTONE_BURST_DELAY = 120;
 
-// ─────────────────────────────────────────────
-// State
-// ─────────────────────────────────────────────
 
 let pullCount   = parseInt(localStorage.getItem(STORAGE_KEY_COUNT) || '0');
 let pullHistory = JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY) || '[]');
@@ -37,9 +30,6 @@ let audioCtx    = null;
 let particles   = [];
 let isAnimating = false;
 
-// ─────────────────────────────────────────────
-// DOM References
-// ─────────────────────────────────────────────
 
 const counterEl   = document.getElementById('counter');
 const photoFrame  = document.getElementById('photo-frame');
@@ -50,27 +40,18 @@ const rankBars    = document.getElementById('rank-bars');
 const canvas      = document.getElementById('confetti-canvas');
 const ctx         = canvas.getContext('2d');
 
-// ─────────────────────────────────────────────
-// Persistence
-// ─────────────────────────────────────────────
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY_COUNT, pullCount);
   localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(pullHistory));
 }
 
-// ─────────────────────────────────────────────
-// Canvas
-// ─────────────────────────────────────────────
 
 function resizeCanvas() {
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
 }
 
-// ─────────────────────────────────────────────
-// Background dots
-// ─────────────────────────────────────────────
 
 function createBackgroundDots() {
   const container = document.getElementById('bg-dots');
@@ -97,9 +78,6 @@ function createBackgroundDots() {
   }
 }
 
-// ─────────────────────────────────────────────
-// Audio engine
-// ─────────────────────────────────────────────
 
 function getAudioContext() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -203,9 +181,6 @@ function playRandomSound() {
   SOUNDS[index]();
 }
 
-// ─────────────────────────────────────────────
-// UI helpers
-// ─────────────────────────────────────────────
 
 function forceReflow(element) {
   void element.offsetWidth;
@@ -273,9 +248,6 @@ function showMilestoneBanner(text) {
   }
 }
 
-// ─────────────────────────────────────────────
-// Activity bar chart
-// ─────────────────────────────────────────────
 
 function updateActivityBars() {
   const now      = Date.now();
@@ -311,9 +283,6 @@ function updateActivityBars() {
   });
 }
 
-// ─────────────────────────────────────────────
-// Confetti engine
-// ─────────────────────────────────────────────
 
 function createParticle(x, y, index) {
   const angle   = (index / CONFETTI_PER_BURST) * Math.PI * 2;
@@ -386,9 +355,6 @@ function spawnConfetti(x, y) {
   if (!isAnimating) requestAnimationFrame(animateConfetti);
 }
 
-// ─────────────────────────────────────────────
-// Main pull action
-// ─────────────────────────────────────────────
 
 function handleEarPull(side, event) {
   // Update state
@@ -397,10 +363,8 @@ function handleEarPull(side, event) {
   if (pullHistory.length > MAX_HISTORY_LENGTH) pullHistory.shift();
   saveState();
 
-  // Update counter display
   counterEl.textContent = pullCount;
 
-  // Trigger all effects
   animateCounter();
   flashPhotoFrame();
   shakeFace();
@@ -415,17 +379,11 @@ function handleEarPull(side, event) {
   updateActivityBars();
 }
 
-// ─────────────────────────────────────────────
-// Event listeners
-// ─────────────────────────────────────────────
 
 earLeft.addEventListener('click',  e => handleEarPull('left', e));
 earRight.addEventListener('click', e => handleEarPull('right', e));
 window.addEventListener('resize', resizeCanvas);
 
-// ─────────────────────────────────────────────
-// Init
-// ─────────────────────────────────────────────
 
 function init() {
   counterEl.textContent = pullCount;
