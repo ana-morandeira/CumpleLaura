@@ -1,8 +1,57 @@
 /* ─────────────────────────────────────────────
-   Base
+   Reset & Base
 ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Quicksand', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0033, #2d0050 50%, #0a0020);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────
+   Header
+───────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+.badge {
+  font-size: 12px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #f9a8d4;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(56px, 13vw, 96px);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.instruction {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 8px;
 }
 
 /* ─────────────────────────────────────────────
@@ -23,16 +72,31 @@ body {
 }
 
 /* ─────────────────────────────────────────────
+   Face wrapper
+───────────────────────────────────────────── */
+#face-wrapper {
+  position: relative;
+  margin-bottom: 24px;
+  z-index: 10;
+  filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.5));
+}
+
+/* ─────────────────────────────────────────────
    Ears
 ───────────────────────────────────────────── */
 .ear {
+  position: absolute;
+  top: 30%;
+  width: 58px;
+  height: 86px;
   transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1), filter 0.15s;
   cursor: pointer;
   user-select: none;
+  z-index: 10;
 }
 
-.ear-left  { transform-origin: right center; transform: rotate(-15deg); }
-.ear-right { transform-origin: left center;  transform: rotate(15deg); }
+.ear-left  { left: -48px;  transform-origin: right center; transform: rotate(-15deg); }
+.ear-right { right: -48px; transform-origin: left center;  transform: rotate(15deg); }
 
 .ear-left:hover  { transform: rotate(-24deg) scaleY(1.15); filter: drop-shadow(0 0 12px #FF2D9A); }
 .ear-right:hover { transform: rotate(24deg) scaleY(1.15);  filter: drop-shadow(0 0 12px #FF2D9A); }
@@ -54,6 +118,15 @@ body {
   transition: border-color 0.1s, box-shadow 0.1s;
 }
 
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+  display: block;
+}
+
 .photo-frame.flash {
   border-color: #FF2D9A;
   box-shadow: 0 0 50px #FF2D9A, 0 0 100px rgba(255, 45, 154, 0.4);
@@ -67,11 +140,67 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
   padding: 14px 52px;
+  text-align: center;
   backdrop-filter: blur(12px);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.counter-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .counter-number {
+  font-family: 'Pacifico', cursive;
+  font-size: 86px;
+  line-height: 1;
+  color: #FFD700;
   text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+}
+
+/* ─────────────────────────────────────────────
+   Activity bars
+───────────────────────────────────────────── */
+.activity-section {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.activity-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 10px;
+}
+
+.rank-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  height: 64px;
+}
+
+.bar-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bar-column {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.4s cubic-bezier(.34, 1.56, .64, 1);
 }
 
 /* ─────────────────────────────────────────────
@@ -87,8 +216,15 @@ body {
 }
 
 /* ─────────────────────────────────────────────
-   Floating background dots
+   Background dots
 ───────────────────────────────────────────── */
+#bg-dots {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
 @keyframes dotFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50%       { transform: translateY(-24px) rotate(180deg); }
@@ -183,16 +319,6 @@ body {
   text-align: center;
   box-shadow: 0 8px 40px rgba(255, 45, 154, 0.5);
   animation: milestoneIn 1.8s ease-out forwards;
-}
-
-/* ─────────────────────────────────────────────
-   Activity bar chart
-───────────────────────────────────────────── */
-.bar-column {
-  transition: height 0.4s cubic-bezier(.34, 1.56, .64, 1);
-  border-radius: 6px 6px 0 0;
-  width: 100%;
-  min-height: 4px;
 }
 
 /* ─────────────────────────────────────────────

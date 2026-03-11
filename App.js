@@ -296,12 +296,12 @@ function updateActivityBars() {
   rankBars.innerHTML = '';
 
   counts.forEach((count, i) => {
-    const wrapper    = document.createElement('div');
-    wrapper.className = 'flex flex-col items-center flex-1';
+    const wrapper     = document.createElement('div');
+    wrapper.className = 'bar-wrapper';
 
-    const bar        = document.createElement('div');
-    const heightPx   = Math.max(4, (count / maxCount) * 56);
-    bar.className    = 'bar-column';
+    const bar         = document.createElement('div');
+    const heightPx    = Math.max(4, (count / maxCount) * 56);
+    bar.className     = 'bar-column';
     bar.style.height     = `${heightPx}px`;
     bar.style.background = PALETTE[i % PALETTE.length];
     bar.style.opacity    = `${0.4 + (count / maxCount) * 0.6}`;
