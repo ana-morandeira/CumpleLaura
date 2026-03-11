@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Feliz Cumpleaños Laura! 🎀</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind custom config -->
+  <script src="tailwind.config.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-[#1a0033] via-[#2d0050] to-[#0a0020] flex flex-col items-center justify-center px-4 py-8 overflow-hidden relative">
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Background decorative dots -->
+  <div id="bg-dots"></div>
+
+  <!-- ── Header ── -->
+  <header class="text-center mb-4 z-10">
+    <p class="text-xs tracking-[5px] uppercase text-pink-300 opacity-80 mb-1">🎀 Feliz Cumpleaños 🎀</p>
+    <h1 class="font-display text-[clamp(56px,13vw,96px)] leading-none gradient-text">LAURA</h1>
+    <p class="text-xs tracking-[3px] uppercase text-white/40 mt-2">👂 Tira de sus orejas 👂</p>
+  </header>
+
+  <!-- ── Face ── -->
+  <div id="face-wrapper" class="relative mb-6 z-10" style="filter: drop-shadow(0 12px 40px rgba(0,0,0,0.5))">
+
+    <!-- Left ear -->
+    <svg id="ear-left" class="ear ear-left absolute z-10 select-none"
+      style="top:30%; left:-48px; width:58px; height:86px;"
+      viewBox="0 0 58 86" fill="none">
+      <ellipse cx="29" cy="43" rx="27" ry="41" fill="#f9b8d4" stroke="#c2557a" stroke-width="2.5"/>
+      <ellipse cx="33" cy="43" rx="16" ry="30" fill="#f48fb1" stroke="#c2557a" stroke-width="1.5"/>
+      <ellipse cx="35" cy="43" rx="9"  ry="20" fill="#e91e8c" opacity="0.4"/>
+    </svg>
+
+    <!-- Photo frame -->
+    <div id="photo-frame" class="photo-frame">
+      <img src="LauraCartoon.png" alt="Laura"
+        class="w-full h-full object-cover object-top pointer-events-none" />
+    </div>
+
+    <!-- Right ear -->
+    <svg id="ear-right" class="ear ear-right absolute z-10 select-none"
+      style="top:30%; right:-48px; width:58px; height:86px;"
+      viewBox="0 0 58 86" fill="none">
+      <ellipse cx="29" cy="43" rx="27" ry="41" fill="#f9b8d4" stroke="#c2557a" stroke-width="2.5"/>
+      <ellipse cx="25" cy="43" rx="16" ry="30" fill="#f48fb1" stroke="#c2557a" stroke-width="1.5"/>
+      <ellipse cx="23" cy="43" rx="9"  ry="20" fill="#e91e8c" opacity="0.4"/>
+    </svg>
+
+  </div>
+
+  <!-- ── Counter ── -->
+  <div class="counter-box z-10 mb-5 text-center">
+    <p class="text-[11px] tracking-[3px] uppercase text-white/40">Tirones de oreja</p>
+    <p id="counter" class="font-display text-[86px] leading-none text-yellow-300 counter-number">0</p>
+  </div>
+
+  <!-- ── Activity bars ── -->
+  <div class="z-10 w-full max-w-xs text-center">
+    <p class="text-[11px] tracking-[3px] uppercase text-white/35 mb-3">⚡ Ritmo de tirones</p>
+    <div id="rank-bars" class="flex items-end justify-center gap-2 h-16"></div>
+  </div>
+
+  <!-- App logic -->
+  <script src="app.js"></script>
+
+</body>
+</html>
