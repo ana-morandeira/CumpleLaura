@@ -2,7 +2,7 @@
 
 App interactiva de cumpleaños donde los amigos pueden tirar de las orejas de Laura y desencadenar efectos visuales y sonoros.
 
-🔗 **[Ver en vivo](https://ana-morandeira.github.io/cumple-laura)**
+🔗 **[Ver en vivo](https://ana-morandeira.github.io/CumpleLaura/)**
 
 ---
 
